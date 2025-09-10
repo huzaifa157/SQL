@@ -1,6 +1,8 @@
 // index.js
 import { faker } from '@faker-js/faker';
 import mysql from 'mysql2';
+import express from "express";
+const app = express();
 
 // Create the connection to database
 const connection = mysql.createConnection({
@@ -10,26 +12,88 @@ const connection = mysql.createConnection({
     password: 'google6464'
 });
   
-let q = "INSERT INTO user (id , username , email, password) VALUES (?,?,?,?)";
-let user= ["586", "shayan_cheema" , "cheema@yayhoo.com" ,"pass123" ]
-
-try{
-    connection.query(q, user, (err,result)=>{
-        if(err) throw err;
-        console.log(result);
-    });    
-}catch(err){
-    console.log(err);
-}
-
-connection.end();
-
 
 let getRandomUser = () => {
-    return {
-        id: faker.string.uuid(),
-        username: faker.internet.username(),
-        email: faker.internet.email(),
-        password: faker.internet.password(),
-    };
+    return [
+         faker.string.uuid(),
+         faker.internet.username(),
+         faker.internet.email(),
+         faker.internet.password(),
+    ];
 };
+
+
+
+ app.get("/" , (req,res)=>{
+    res.send("welcome to home page");
+ })
+
+ app.listen("8080" , ()=>{
+    console.log("server is working at 8080")
+ })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// try{
+//     connection.query(q, [data], (err,result)=>{
+//         if(err) throw err;
+//         console.log(result);
+//     });    
+// }catch(err){
+//     console.log(err);
+// }
+
+// connection.end();
